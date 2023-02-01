@@ -56,6 +56,22 @@ function render(element, container) {
   container.appendChild(dom);
 }
 
+function workLoop(deadLine) {
+  let nextUnitOfWork = null;
+  let shouldYield = false;
+  while (!shouldYield && nextUnitOfWork) {
+    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+    shouldYield = deadLine.timeRemaining() > 1;
+  }
+  requestIdleCallback(workLoop);
+}
+
+requestIdleCallback(workLoop);
+
+function performUnitOfWork(nextUnitOfWork) {
+  // TODO: 
+}
+
 const preact = {
   createElement,
   render,
