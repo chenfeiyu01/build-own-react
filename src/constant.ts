@@ -2,6 +2,8 @@ type IProps = {
   [t: string]: string;
 };
 
+type TEffectTag = 'UPDATE' | 'PLACEMENT' | 'DELETION';
+
 type IPropsHasChildren = {
   children: Array<IElement>;
   [t: string]: any;
@@ -21,4 +23,13 @@ interface IFiber extends IElement {
   child?: IFiber;
   sibling?: IFiber;
   parent?: IFiber;
+
+  alternate: IFiber;
+  effectTag: TEffectTag;
+}
+
+interface IWipRoot {
+  dom: HTMLElement;
+  props: { children: Array<IElement> };
+  alternme: null;
 }
